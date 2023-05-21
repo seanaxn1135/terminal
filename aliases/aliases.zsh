@@ -5,12 +5,11 @@ alias test='echo "test"'
 killport() {
   if [[ $1 == "-f" ]]; then
     shift
-    kill -9 $(lsof -ti "$1")
+    kill -9 $(lsof -ti:"$1")
   else
-    kill -15 "$1"
+    kill -15 $(lsof -ti:"$1")
   fi
 }
-
 
 # Search bash history
 alias history='history | grep'
@@ -22,7 +21,7 @@ alias ga='git add'
 alias gaa='git add .'
 alias gc='git commit'
 alias gcm='git commit -m'
-alias gcam='git commit --amend'
+alias gcam='git commit --amend --no-edit'
 alias gpu='git pull'
 alias gpur='git pull --rebase'
 alias gpuff='git pull --ff-only'
