@@ -2,7 +2,15 @@
 alias test='echo "test"'
 
 # Kill a process running on a specific port
-alias killport='lsof -i :$1 | awk '\''{print $2}'\'' | tail -n 1 | xargs kill'
+killport() {
+  if [[ $1 == "-f" ]]; then
+    shift
+    kill -9 $(lsof -ti "$1")
+  else
+    kill -15 "$1"
+  fi
+}
+
 
 # Search bash history
 alias history='history | grep'
